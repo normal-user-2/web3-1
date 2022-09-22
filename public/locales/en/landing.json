@@ -1,0 +1,66 @@
+{
+  "about": {
+    "title": "Learn and earn cryptocurrency <br /> along with decentralized <br /> EverClub ecosystem",
+    "benefits": "With the help of LEARN2EARN, the EverClub platform helps people get an education in the field of cryptocurrencies, <br /> start earning and unites all its residents from different parts of the world into one big club of investors."
+  },
+  "stats": {
+    "totalParticipants": "Total participants",
+    "joinLast24hours": "Joined within 24 hours",
+    "alreadyEarned": "Members already earned"
+  },
+  "mission": {
+    "title": "Mission",
+    "explanation": "EverClub creates the necessary infrastructure <br /> for teaching cryptocurrencies to novice <br /> investors, and proven tools for experienced <br /> investors to work in the cryptocurrency market"
+  },
+  "video": {
+    "howEverClubWork": "How does EverClub work?",
+    "about": "Watch video 3 minutes <br /> Founder's Word"
+  },
+  "results": {
+    "title": "The results of our club residents",
+    "startButton": "Start learning and earning"
+  },
+  "education": {
+    "title": "Educational platform",
+    "courses": {
+      "title": "Courses",
+      "passCourseButton": "Pass the course",
+      "content": [
+        {
+          "title": "Purchase or reactivation. <br /> What strategy to choose",
+          "description": "Lorem ipsum dolor sit amet, "
+        },
+        {
+          "title": "Purchase or reactivation. <br /> What strategy to choose",
+          "description": "Lorem ipsum dolor sit amet, "
+        },
+        {
+          "title": "Purchase or reactivation. <br /> What strategy to choose",
+          "description": "Lorem ipsum dolor sit amet, "
+        },
+        {
+          "title": "Purchase or reactivation. <br /> What strategy to choose",
+          "description": "Lorem ipsum dolor sit amet, "
+        }
+      ]
+    }
+  },
+  "news": {
+    "title": "Media about everclub"
+  },
+  "founder": {
+    "quote": {
+      "title": "Founder Quote",
+      "text": "“Your dreams will not come true just because you want them to. Only the desire to acquire new knowledge, the desire to develop yourself and hard work will make your dreams come true and open the way to a new life for you!”"
+    },
+    "viewBiographyButton": "View biography",
+    "biography": {
+      "title": "Biography of the founder",
+      "paragraphs": [
+        "Anthony comes from a family of emigrants: he was born in Russia and has been living with his parents in Canada since the age of 2. The family moved from Toronto to Montreal, thanks to which Anthony is fluent in both English and French.",
+        "After graduating from university, Anthony worked at a Canadian startup developing a crypto exchange. Herewas the first acquaintance with the world of trading. This direction captured Anthony so much that hedevoted all his free time to analyzing stock charts and studying trading strategies. There was plenty ofliterature on investing and trading, but most of the books were about the stock market and conservativeinvestment vehicles. As for innovations, such as cryptocurrencies, there were very few materials in thoseyears. However, the thirst for knowledge and the desire to develop gave Anthony the strength to thoroughlystudy the issue. As a result, the hobby turned into a profession, and later became the work of his wholelife.",
+        "Having achieved success as a trader and having earned the first serious capital, Anthony opens his ownbrokerage office in Toronto and becomes the founder of an analytical center in Ottawa. As a result, thedesire to scale leads Anthony to the idea of launching his own international investment and educationalstartup in order to open the world of trading, investment and making money on the Internet to thousands ofpeople. That's how EverClub was born!"
+      ]
+    }
+  }
+}

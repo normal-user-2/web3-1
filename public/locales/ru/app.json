@@ -1,0 +1,81 @@
+{
+  "auth": {
+    "openReadonlyCabinet": "Open readonly cabinet",
+    "connectWallet": {
+      "title": "Connect you wallet",
+      "description": "To proceed connect wallet using instruction below",
+      "button": "Connect wallet"
+    },
+    "login": {
+      "title": "Login to your personal account",
+      "description": "To view account ID or BSC wallet",
+      "automaticLogin": "Automatic login",
+      "walletIsNotRegistered": "Wallet is not registered"
+    },
+    "register": {
+      "title": "Automatic registration",
+      "invitee": "Check the ID of your invitee",
+      "button": "Automatic registration"
+    },
+    "instructions": {
+      "metamask": {
+        "title": "How to connect crypto wallet?",
+        "whyMetamask": "Для использования децентрализованной платформы EverClub необходимо использовать криптокошелёк. Мы рекомендуем использовать кошелек MetaMask - это надежный и проверенный временем сервис.",
+        "platforms": "MetaMask можно установить в браузерах Google Chrome и Firefox, а также он доступен для устройств под управлением iOS и Android.",
+        "steps": [
+          "Перейдите на официальную страницу загрузки MetaMask по ссылке: <0 />",
+          "Выберите свой браузер, затем вы будете перенаправлены в интернет-магазин Chrome или на сайт дополнений Firefox.",
+          "Нажмите кнопку установки",
+          "После успешного окончания установки вы увидите приветственное сообщение",
+          "Приступите к созданию кошелька. Здесь вам будет предложено либо импортировать seed-фразу, либо создать новую.",
+          "Нажмите \"Создать кошелек\". Здесь вам будет предложено согласится или отказаться от предоставления разработчикам анонимных данных, чтобы помочь улучшить приложение.",
+          "Создайте надежный пароль, поставьте “галочку” в разделе \"Условия использования\" и нажмите \"Создать\". Обязательно сохраните пароль в надежном месте!",
+          "Далее Метамаск генерирует для вас уникальную seed-фразу являющуюся ключом к вашему кошельку. Обязательно сохраните резервную копию seed-фразы в надежном месте!",
+          "Приложение попросит подтвердить фразу. Если вы не сохранили фразу, нажмите \"Назад\" и запишите! Затем подтвердите фразу и нажмите \"Все готово\".",
+          "Ваш MetaMask установлен и готов к работе в сети Ethereum!"
+        ]
+      },
+      "buyBNB": {
+        "title": "How to buy BNB cryptocurrency?",
+        "steps": [
+          "Go to the website: <0 />",
+          "Choose the appropriate payment system with which you want to exchange for the BNB currency.",
+          "Choose the right service with the best rate and rating.",
+          "Go to the website of the selected exchange and follow the simple instructions. The exchange is usually automatic and very fast. Make sure your MetaMask has received funds."
+        ]
+      }
+    },
+    "FAQ": [
+      {
+        "title": "What is EverClub?",
+        "description": "EVERCLUB is a decentralised platform based on smart contracts. Through smart contracts of the BSC network, users are rewarded in the respective cryptocurrencies for expanding their team and increasing the number of EverClub participants. The code of all contracts is publicly available, as well as information about transactions in the BSC network."
+      },
+      {
+        "title": "What is smart contract? What is its advantage?",
+        "description": "A smart contract is an algorithm within the cryptocurrency blockchain that automates the responsibilities within the system. In the case of EverClub, the contract eliminates the dominant role of the development team in controlling rewards and allows that role to be focused on technical support. The smart contract is responsible for distributing rewards to participants when the right conditions are fulfilled. Once created, a smart contract cannot be hacked or modified."
+      },
+      {
+        "title": "What is different from a piramid?",
+        "description": "A pyramid scheme involves one or more people at the top controlling all the income. At any time, they can press the \"take the money\" button and disappear. In EverClub, however, a smart contract manages all the rewards. At any given moment, the funds are in the wallets of the participants. No third parties are involved - blockchain ensures the integrity and transparency of the reward."
+      },
+      {
+        "title": "What do you need to join club?",
+        "description": "To register in the Community and Academy you only need an MetaMask wallet. By creating an account, you can comment on materials on the site, as well as apply and become an author or speaker for EverClub. If the Community starts to value you as an expert, then people will want to join your team. Publishing your content in the EverClub Community and Academy is your social capital to help you invite partners."
+      }
+    ]
+  },
+  "dashboard": {
+    "wallet": {
+      "accountWallet": "Account wallet",
+      "affiliateLink": "Affiliate link",
+      "shareLink": "Share and invite to Everclub",
+      "copiedToClipboard": "Copied to clipboard"
+    },
+    "platform": {
+      "buy": "Buy",
+      "reactivate": "Reactivate",
+      "reactivated": "Reactiv.",
+      "usersOnPlatform": "Tiers"
+    }
+  }
+}
