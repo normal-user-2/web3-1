@@ -72,7 +72,7 @@ export const Landing: FC = () => {
       <section className='mission' id='mission'>
         <div className='mission_container'>
           <div className='mission-text'>
-            <Typography variant='h4' textTransform='uppercase'>
+            <Typography variant='h4' textTransform='uppercase' letterSpacing='0.3em'>
               <Trans t={t} i18nKey='mission.title' />
             </Typography>
             <div>
