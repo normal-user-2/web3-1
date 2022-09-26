@@ -64,6 +64,8 @@ export const useLoginQuery = () => {
   return { isExist: result.data, ...result } as const;
 };
 
+export const REGISTRATION_FEE = '0.002';
+
 export const useRegisterMutation = (options?: UseMutationOptions<void, Error, string>) => {
   const queryClient = useQueryClient();
   const contract = useEverclubContract();
@@ -73,8 +75,11 @@ export const useRegisterMutation = (options?: UseMutationOptions<void, Error, st
       throw new Error('Wallet is not connected');
     }
     const tx = await contract
-      .registrationExt(referralAddress, { value: ethers.utils.parseEther('0.002') })
+      .registrationExt(referralAddress, { value: ethers.utils.parseEther(REGISTRATION_FEE) })
       .catch((error) => {
+        if (error.code === 'ACTION_REJECTED') {
+          throw new Error();
+        }
         if (error.code === 'UNPREDICTABLE_GAS_LIMIT') {
           // reverted tx
           throw new Error(error.reason.replace(/execution reverted: /g, ''));
