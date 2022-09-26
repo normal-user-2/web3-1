@@ -5,7 +5,17 @@ import { Link } from '@mui/material';
 
 import { FCC } from 'helpers/types';
 
-export const DocumentLink: FCC<{ name?: string }> = ({ children, name }) => {
+type Props =
+  | {
+      name: string;
+      href?: undefined;
+    }
+  | {
+      name?: undefined;
+      href: string;
+    };
+
+export const DocumentLink: FCC<Props> = ({ children, name, href }) => {
   const { i18n } = useTranslation();
   const lang = i18n.language.slice(0, 2);
   return (
@@ -16,7 +26,7 @@ export const DocumentLink: FCC<{ name?: string }> = ({ children, name }) => {
         gap: 1,
         lineHeight: 1,
       }}
-      href={`/docs/${name}_${lang}.pdf`}
+      href={href != null ? href : `/docs/${name}_${lang}.pdf`}
       rel='noopener'
       target='_blank'
       underline='none'
