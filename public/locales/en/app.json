@@ -20,10 +20,10 @@
     "instructions": {
       "metamask": {
         "title": "How to connect crypto wallet?",
-        "why Metamask": "To use the EverClub decentralized platform, you need to use a crypto wallet. We recommend using the MetaMask wallet - it is a reliable and time-tested service.",
+        "whyMetamask": "To use the EverClub decentralized platform, you need to use a crypto wallet. We recommend using the MetaMask wallet - it is a reliable and time-tested service.",
         "platforms": "MetaMask can be installed on Google Chrome and Firefox browsers, and is also available for iOS and Android devices.",
         "steps": [
-          "Go to the official MetaMask download page from the link: <0 />",
+          "Go to the official MetaMask download page from the link: <0>metamask.io/download</0>",
           "Select your browser, then you will be redirected to the Chrome Web Store or the Firefox add-ons site.",
           "Click the install button",
           "After successful installation, you will see a welcome message.",
@@ -38,8 +38,8 @@
       "buyBNB": {
         "title": "How to buy BNB cryptocurrency?",
         "steps": [
-          "Go to the website: <0 />",
-          "Choose the appropriate payment system with which you want to exchange for the BNB currency.",
+          "Go to the website: <0>bestchange.com</0>",
+          "Choose the appropriate payment system with which you want to exchange for the BinanceCoin BEP20 currency.",
           "Choose the right service with the best rate and rating.",
           "Go to the website of the selected exchange and follow the simple instructions. The exchange is usually automatic and very fast. Make sure your MetaMask has received funds."
         ]
