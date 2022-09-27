@@ -13,6 +13,8 @@ import { useContractAddress } from 'app/contract';
 
 import { DocumentLink } from 'components/DocumentLink';
 
+import { formatAddress } from 'helpers/format';
+
 const socialLinks = [
   'https://twitter.com/EverClub_L2E',
   'https://t.me/everclub_platform',
@@ -116,7 +118,7 @@ export const Footer: FC = () => {
                 lineHeight='1'
                 display='inline'
               >
-                BSC {`${contractAddress?.slice(0, 5)}...${contractAddress?.slice(-6)}`}
+                BSC {formatAddress(contractAddress)}
               </Typography>
             )}
           </Stack>

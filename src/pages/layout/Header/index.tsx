@@ -35,17 +35,7 @@ export const Header: FC = () => {
   const [activeWallet, setActiveWallet] = useActiveWallet();
   const { t, i18n } = useTranslation('shared');
   const languageSelector = (
-    <Select
-      value={i18n.language.slice(0, 2)}
-      onChange={(event) => i18n.changeLanguage(event.target.value)}
-      MenuProps={{
-        sx: {
-          '& .MuiMenu-paper': {
-            p: 0,
-          },
-        },
-      }}
-    >
+    <Select value={i18n.language.slice(0, 2)} onChange={(event) => i18n.changeLanguage(event.target.value)}>
       <MenuItem value='en'>En</MenuItem>
       <MenuItem value='ru'>Ru</MenuItem>
     </Select>
@@ -103,17 +93,17 @@ export const Header: FC = () => {
           >
             <Routes>
               <Route
-                path='/dashboard'
+                path='/dashboard/*'
                 element={
                   <>
-                    <StyledNavLink to='/dashboard'>
+                    <StyledNavLink to='/dashboard' end>
                       <HomeIcon color='primary' />
                       <Trans t={t} i18nKey='header.dashboard' />
                     </StyledNavLink>
-                    {/* <StyledNavLink to='/partners'>
-                          <WorkIcon color='primary' />
-                          Partners
-                        </StyledNavLink> */}
+                    <StyledNavLink to='/dashboard/partners'>
+                      <WorkIcon color='primary' />
+                      <Trans t={t} i18nKey='header.partners' />
+                    </StyledNavLink>
                     <StyledNavLink to='/login' onClick={() => setActiveWallet(undefined)}>
                       <LogoutIcon /> <Trans t={t} i18nKey='header.logout' />
                     </StyledNavLink>

@@ -9,11 +9,13 @@ import { Box, Divider, Paper, Skeleton, Stack, StackProps, SvgIcon, Typography, 
 import { ReactComponent as NetworkIcon } from 'assets/icons/network.svg';
 import { ReactComponent as RoiIcon } from 'assets/icons/roi.svg';
 
+import { useGetPlatforms } from 'app/api';
 import { useActiveWallet } from 'app/auth';
 import {
   useBuyPlatformMutation,
   useBuyPriceQuery,
   useGetPlatformQuery,
+  useGetUserQuery,
   useReactivatePlatformMutation,
   useReactivatePriceQuery,
 } from 'app/contract';
@@ -188,6 +190,13 @@ interface Props {
 export const Platform: FC<Props> = ({ level }) => {
   const [address] = useActiveWallet();
   const { platform } = useGetPlatformQuery(level, address);
+  const { user } = useGetUserQuery(address);
+  const { data: platforms } = useGetPlatforms(user?.id?.toNumber());
+
+  const reactivateAmount =
+    platforms != null
+      ? platforms.find(({ platform_level_id }) => platform_level_id === level)?.reactivations ?? 0
+      : undefined;
 
   if (platform == null) {
     return <Skeleton variant='rounded' height={180} width={250} />;
@@ -198,8 +207,10 @@ export const Platform: FC<Props> = ({ level }) => {
   }
 
   if (platform.readyToReactivate) {
-    return <PlatformToActivate level={level} membersCount={platform.membersCount} reactivateAmount={0} />;
+    return (
+      <PlatformToActivate level={level} membersCount={platform.membersCount} reactivateAmount={reactivateAmount} />
+    );
   }
 
-  return <PlatformBase level={level} membersCount={platform.membersCount} reactivateAmount={0} />;
+  return <PlatformBase level={level} membersCount={platform.membersCount} reactivateAmount={reactivateAmount} />;
 };

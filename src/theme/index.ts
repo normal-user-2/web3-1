@@ -202,10 +202,10 @@ export const theme = createTheme({
         root: {
           display: 'flex',
           flexDirection: 'column',
-          padding: '24px',
         },
         rounded: {
           borderRadius: '2rem',
+          overflow: 'clip',
         },
       },
     },

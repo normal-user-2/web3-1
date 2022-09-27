@@ -6,13 +6,22 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import CloseIcon from '@mui/icons-material/CloseRounded';
-import { Button, Dialog, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material';
+import { Button, Dialog, DialogContent, DialogTitle, IconButton, Skeleton, Stack, Typography } from '@mui/material';
+
+import { useGetBNBPrice, useGetStatistic } from 'app/api';
 
 import './styles/main.scss';
 import './styles/media.scss';
 
+const formatterRegex = /(\d)(?=(\d{3})+(?!\d))/g;
+const formatNumber = (e: number) => {
+  return Math.ceil(e).toString().replace(formatterRegex, '$1 ');
+};
+
 export const Landing: FC = () => {
   const { t } = useTranslation('landing');
+  const { data } = useGetStatistic();
+  const { data: BNBPrice } = useGetBNBPrice();
 
   const [open, setOpen] = useState(false);
   const openModal = () => setOpen(true);
@@ -40,7 +49,7 @@ export const Landing: FC = () => {
               <p>
                 <Trans t={t} i18nKey='stats.totalParticipants' />
               </p>
-              <span>24 435</span>
+              {data == null ? <Skeleton /> : <span>{formatNumber(data.all_count)}</span>}
             </div>
             <div className='bord'>
               <img src='./assets/images/main/line.svg' />
@@ -49,7 +58,7 @@ export const Landing: FC = () => {
               <p>
                 <Trans t={t} i18nKey='stats.joinLast24hours' />
               </p>
-              <span>+140</span>
+              {data == null ? <Skeleton /> : <span>+{formatNumber(data.users_invited_last_24_hour)}</span>}
             </div>
             <div className='bord'>
               <img src='./assets/images/main/line.svg' />
@@ -58,7 +67,7 @@ export const Landing: FC = () => {
               <p>
                 <Trans t={t} i18nKey='stats.alreadyEarned' />
               </p>
-              <span>85 045$</span>
+              {data == null || BNBPrice == null ? <Skeleton /> : <span>${formatNumber(data.all_trx * BNBPrice)}</span>}
             </div>
           </div>
           <div className='mouse'>

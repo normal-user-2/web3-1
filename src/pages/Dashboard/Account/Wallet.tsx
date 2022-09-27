@@ -19,7 +19,9 @@ import {
 } from '@mui/material';
 
 import { useActiveWallet } from 'app/auth';
-import { useGetUser } from 'app/contract';
+import { useGetUserQuery } from 'app/contract';
+
+import { formatAddress } from 'helpers/format';
 
 const Row = styled('div')`
   display: flex;
@@ -31,7 +33,7 @@ const Row = styled('div')`
 export const Wallet: FC = () => {
   const { t } = useTranslation('app');
   const [address] = useActiveWallet();
-  const { user, isLoading } = useGetUser(address);
+  const { user, isLoading } = useGetUserQuery(address);
   const referralLink = window.location.origin + `/r/${user?.id}`;
 
   const [copiedSnackbar, setCopiedSnackbar] = useState(false);
@@ -41,6 +43,7 @@ export const Wallet: FC = () => {
       sx={{
         bgcolor: 'background.darkGray',
         gap: 3,
+        p: 3,
       }}
     >
       <Stack gap={1}>
@@ -50,9 +53,7 @@ export const Wallet: FC = () => {
         <Row>
           <Row sx={{ justifyContent: 'flex-start', gap: 1 }}>
             <WalletIcon color='primary' />
-            <Typography fontSize={14}>
-              {address == null ? <Skeleton width={50} /> : `${address.slice(0, 6)}...${address.slice(-6)}`}
-            </Typography>
+            <Typography fontSize={14}>{address == null ? <Skeleton width={50} /> : formatAddress(address)}</Typography>
           </Row>
           <IconButton
             disabled={address == null}

@@ -96,7 +96,7 @@ export const useRegisterMutation = (options?: UseMutationOptions<void, Error, st
   }, options);
 };
 
-export const useGetUser = (address?: string) => {
+export const useGetUserQuery = (address?: string) => {
   const contract = useEverclubContract();
   const result = useQuery(
     ['contract', 'user', address ?? ''],
@@ -219,6 +219,7 @@ export const useBuyPlatformMutation = (level: number) => {
     });
     await tx?.wait();
     queryClient.invalidateQueries(['contract', 'platform', address, String(level)]);
+    queryClient.invalidateQueries(['api', 'user', 'platforms']);
   });
 };
 
@@ -265,6 +266,7 @@ export const useReactivatePlatformMutation = (level: number) => {
     });
     await tx?.wait();
     queryClient.invalidateQueries(['contract', 'platform', address, String(level)]);
+    queryClient.invalidateQueries(['api', 'user', 'platforms']);
   });
 };
 
@@ -290,7 +292,7 @@ export const useGetPlatformQuery = (level: number, address?: string) => {
     },
     {
       retry: false,
-      staleTime: 30 * 1000,
+      staleTime: 1 * 60 * 1000,
       enabled: contract != null && address != null,
     },
   );
