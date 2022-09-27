@@ -64,7 +64,7 @@ export const useLoginQuery = () => {
   return { isExist: result.data, ...result } as const;
 };
 
-export const REGISTRATION_FEE = '0.002';
+export const REGISTRATION_FEE = import.meta.env.VITE_REGISTRATION_FEE;
 
 export const useRegisterMutation = (options?: UseMutationOptions<void, Error, string>) => {
   const queryClient = useQueryClient();
