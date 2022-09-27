@@ -90,6 +90,7 @@ export const Footer: FC = () => {
             <Stack gap={1}>
               <DocumentLink name='revenue_structure'>Revenue structure</DocumentLink>
               <DocumentLink name='presentation'>Presentation</DocumentLink>
+              <DocumentLink name='manual'>Manual</DocumentLink>
               <DocumentLink href='/docs/india.pdf'>India</DocumentLink>
             </Stack>
           </Stack>
