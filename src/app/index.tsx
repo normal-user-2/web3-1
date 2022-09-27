@@ -1,5 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { SnackbarProvider } from 'notistack';
 import { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { WagmiConfig, configureChains, createClient } from 'wagmi';
@@ -75,7 +76,9 @@ export const App: FC = () => (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Pages />
+        <SnackbarProvider maxSnack={3}>
+          <Pages />
+        </SnackbarProvider>
         <ReactQueryDevtools />
       </ThemeProvider>
     </BrowserRouter>

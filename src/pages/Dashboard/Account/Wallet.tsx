@@ -1,4 +1,5 @@
 import copy from 'copy-to-clipboard';
+import { useSnackbar } from 'notistack';
 import { FC, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -31,13 +32,12 @@ const Row = styled('div')`
 `;
 
 export const Wallet: FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation('app');
   const [address] = useActiveWallet();
   const { user, isLoading } = useGetUserQuery(address);
   const referralLink = window.location.origin + `/r/${user?.id}`;
-
-  const [copiedSnackbar, setCopiedSnackbar] = useState(false);
-  const handleCloseSnackbar = () => setCopiedSnackbar(false);
+  const notifyCopied = () => enqueueSnackbar(t('dashboard.wallet.copiedToClipboard'), { variant: 'success' });
   return (
     <Paper
       sx={{
@@ -59,7 +59,7 @@ export const Wallet: FC = () => {
             disabled={address == null}
             onClick={() => {
               copy(address ?? '');
-              setCopiedSnackbar(true);
+              notifyCopied();
             }}
           >
             <CopyIcon />
@@ -84,7 +84,7 @@ export const Wallet: FC = () => {
               <IconButton
                 onClick={() => {
                   copy(referralLink ?? '');
-                  setCopiedSnackbar(true);
+                  notifyCopied();
                 }}
               >
                 <CopyIcon color='action' />
@@ -99,17 +99,12 @@ export const Wallet: FC = () => {
           size='large'
           onClick={() => {
             copy(referralLink ?? '');
-            setCopiedSnackbar(true);
+            notifyCopied();
           }}
         >
           <Trans t={t} i18nKey='dashboard.wallet.shareLink' />
         </Button>
       </Stack>
-      <Snackbar open={copiedSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity='success' sx={{ width: '100%' }}>
-          <Trans t={t} i18nKey='dashboard.wallet.copiedToClipboard' />
-        </Alert>
-      </Snackbar>
     </Paper>
   );
 };

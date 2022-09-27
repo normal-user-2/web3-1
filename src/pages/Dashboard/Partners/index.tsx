@@ -1,12 +1,38 @@
+import copy from 'copy-to-clipboard';
+import { useSnackbar } from 'notistack';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import CopyIcon from '@mui/icons-material/ContentCopyRounded';
+import { IconButton, LinearProgress } from '@mui/material';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
 import { useGetReferrals } from 'app/api';
 import { useActiveWallet } from 'app/auth';
 import { useGetUserQuery } from 'app/contract';
 
 import { formatAddress } from 'helpers/format';
+
+const Wallet: FC<GridRenderCellParams> = ({ value: address }) => {
+  const { t } = useTranslation('app');
+
+  const { enqueueSnackbar } = useSnackbar();
+
+  return (
+    <>
+      <IconButton
+        disabled={address == null}
+        onClick={() => {
+          copy(address ?? '');
+          enqueueSnackbar(t('dashboard.wallet.copiedToClipboard'), { variant: 'success' });
+        }}
+      >
+        <CopyIcon />
+      </IconButton>
+      {formatAddress(address)}
+    </>
+  );
+};
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'User ID', width: 130 },
@@ -19,30 +45,44 @@ const columns: GridColDef[] = [
   {
     field: 'wallet',
     headerName: 'Wallet',
-    valueGetter: ({ row }) => {
-      const address = row.wallet[0].address;
-      return formatAddress(address);
-    },
+    valueGetter: ({ row }) => row.wallet[0].address,
+    renderCell: (props) => <Wallet {...props} />,
     flex: 1,
     minWidth: 150,
   },
   { field: 'platforms', headerName: 'Platform' },
-  { field: 'profit', headerName: 'Profit', valueGetter: ({ row }) => `${Number(row.wallet[0].amount_transfers)} BNB` },
+  {
+    field: 'profit',
+    headerName: 'Profit',
+    valueGetter: ({ row }) => `${Number(row.wallet[0].amount_transfers)} BNB`,
+    flex: 1,
+    minWidth: 150,
+  },
   { field: 'referrals_count', headerName: 'Referrals' },
 ];
 
 export const Partners: FC = () => {
   const [address] = useActiveWallet();
-  const { user } = useGetUserQuery(address);
-  const { data } = useGetReferrals(user?.id.toNumber());
-
-  if (data == null) {
-    return null;
-  }
+  const { user, isLoading: isUserLoading } = useGetUserQuery(address);
+  const { data, isLoading } = useGetReferrals(user?.id.toNumber());
 
   return (
-    <div style={{ minHeight: 600, width: '100%', flexGrow: 1 }}>
-      <DataGrid rows={data} columns={columns} />
+    <div
+      style={{
+        minHeight: 600,
+        maxHeight: '90vh',
+        width: '100%',
+        flexGrow: 1,
+      }}
+    >
+      <DataGrid
+        loading={isUserLoading || isLoading}
+        components={{
+          LoadingOverlay: LinearProgress,
+        }}
+        rows={data ?? []}
+        columns={columns}
+      />
     </div>
   );
 };
