@@ -1,10 +1,11 @@
 {
   "header": {
-    "dashboard": "Dashboard",
-    "logout": "Logout",
-    "openAppButton": "Open app"
+    "dashboard": "Платформы",
+    "partners": "Партнёры",
+    "logout": "Выйти",
+    "openAppButton": "Открыть приложение"
   },
   "footer": {
-    "allDocumentsInSocial": "All documents are available for download in our social"
+    "allDocumentsInSocial": "Все документы доступны для скачивания в наших соцсетях"
   }
 }

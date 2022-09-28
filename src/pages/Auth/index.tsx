@@ -59,6 +59,7 @@ export const Auth: FC = () => {
             alignItems: 'center',
             boxShadow: '0px 4px 20px 0px #00000040',
             px: 4,
+            py: 3,
           }}
           elevation={0}
         >

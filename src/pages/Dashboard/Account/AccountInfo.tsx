@@ -9,7 +9,7 @@ import { Box, Divider, Paper, Skeleton, Stack, Typography, styled } from '@mui/m
 
 import { User, useGetBNBPrice, useGetUser } from 'app/api';
 import { useActiveWallet } from 'app/auth';
-import { useGetUser as useGetContractUser } from 'app/contract';
+import { useGetUserQuery as useGetContractUser } from 'app/contract';
 
 import { getNeonFilter } from 'theme';
 

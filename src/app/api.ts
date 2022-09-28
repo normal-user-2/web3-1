@@ -19,6 +19,7 @@ interface Wallet {
   profit_referrals: Decimal;
   profit_reinvest: Decimal;
 }
+
 interface Badge {
   name: string;
   level: number;
@@ -27,10 +28,6 @@ interface Badge {
 export interface User {
   id: number;
   contract_user_id: number;
-  user_name: string;
-  avatar: string;
-  blocked_faq: boolean;
-  language: 'en' | 'ru' | 'sp';
   this_referral: number | null;
   referrals_count: number;
   created_at: string;
@@ -38,13 +35,16 @@ export interface User {
 
   wallet: Wallet;
   statuses: Badge[];
+
+  subscribers?: User[];
 }
+
 interface Platform {
   id: number;
   wallet_id: number;
   platform_level_id: number;
   platform_level: string;
-  active: boolean;
+  active: 1 | 0;
   activated: boolean;
   subscribers: number[];
   reactivations: number;
@@ -52,7 +52,7 @@ interface Platform {
 }
 
 export const useGetBNBPrice = () => {
-  return useQuery<number, unknown, number>(
+  return useQuery<number>(
     ['binance', 'BNBUSDT'],
     async () => {
       const response = await axios('https://www.binance.com/api/v3/ticker/price?symbol=BNBUSDT');
@@ -65,7 +65,7 @@ export const useGetBNBPrice = () => {
 };
 
 export const useGetUser = (address?: string) => {
-  return useQuery<User, unknown, User>(
+  return useQuery<User>(
     ['api', 'user', address],
     async () => {
       const response = await baseQuery(`user/wallet/${address}`);
@@ -78,33 +78,53 @@ export const useGetUser = (address?: string) => {
   );
 };
 
-//     getReferrals: builder.query<User, { walletId: number }>({
-//       query: ({ walletId }) => ({
-//         url: '/service/cabinet/partners',
-//         params: {
-//           contract_user_id: walletId,
-//         },
-//       }),
-//       transformResponse: (response: { data: User }) => response.data,
-//     }),
+export const useGetReferrals = (walletId?: number) => {
+  return useQuery<User[]>(
+    ['api', 'user', 'referrals', walletId],
+    async () => {
+      const response = await baseQuery('/service/cabinet/partners', {
+        params: {
+          contract_user_id: walletId,
+        },
+      });
+      return response.data.data.subscribers;
+    },
+    {
+      staleTime: 3 * 60 * 1000,
+      enabled: walletId != null,
+    },
+  );
+};
 
-//     getStatistic: builder.query<{ all_count: number; users_invited_last_24_hour: number; all_trx: number }, void>({
-//       query: () => '/service/cabinet/info',
-//     }),
+interface Statistic {
+  all_count: number;
+  users_invited_last_24_hour: number;
+  all_trx: number;
+}
 
-//     getPlatformStatus: builder.query<Platform[], { walletId: number }>({
-//       query: ({ walletId }) => `service/platforms/wallets/${walletId}`,
-//       transformResponse: (response: {
-//         data: Array<
-//           Omit<Platform, 'active'> & {
-//             active: 1 | 0;
-//           }
-//         >;
-//       }) =>
-//         response.data.map((platform) => ({
-//           ...platform,
-//           active: Boolean(platform.active),
-//         })),
-//     }),
-//   }),
-// });
+export const useGetStatistic = () => {
+  return useQuery<Statistic>(
+    ['api', 'statistic'],
+    async () => {
+      const response = await baseQuery('/service/cabinet/info');
+      return response.data;
+    },
+    {
+      staleTime: 20 * 60 * 1000,
+    },
+  );
+};
+
+export const useGetPlatforms = (walletId?: number) => {
+  return useQuery<Platform[]>(
+    ['api', 'user', 'platforms', walletId],
+    async () => {
+      const response = await baseQuery(`/service/platforms/wallets/${walletId}`);
+      return response.data.data;
+    },
+    {
+      staleTime: 1 * 60 * 1000,
+      enabled: walletId != null,
+    },
+  );
+};

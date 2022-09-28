@@ -7,7 +7,7 @@ import { LoadingButton } from '@mui/lab';
 import { Collapse, TextField, Typography } from '@mui/material';
 
 import { useActiveWallet, useReferralId as useSavedReferralId } from 'app/auth';
-import { useIdToAddressQuery, useRegisterMutation } from 'app/contract';
+import { REGISTRATION_FEE, useIdToAddressQuery, useRegisterMutation } from 'app/contract';
 
 import { nasaFontFamily } from 'theme';
 
@@ -60,7 +60,7 @@ export const Register: FC = () => {
         <Trans t={t} i18nKey='auth.register.title' />
       </Typography>
       <Typography fontFamily={nasaFontFamily} fontSize={14} color='text.secondary' mt={-1}>
-        <Trans t={t} i18nKey='auth.register.title' />
+        {REGISTRATION_FEE} BNB
       </Typography>
       <TextField
         placeholder='Referral ID'

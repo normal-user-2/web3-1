@@ -53,7 +53,7 @@ export const Pages = () => {
                 {/* TODO: Add react lazy for code-splitting */}
                 {/* <Route path='academy' element={<Academy />} /> */}
                 {/* <Route path='academy/lesson' element={<Lesson />} /> */}
-                <Route path='dashboard' element={<Dashboard />} />
+                <Route path='dashboard/*' element={<Dashboard />} />
                 <Route path='login' element={<Auth />} />
                 <Route path='r/:id' element={<Referral />} />
               </Routes>

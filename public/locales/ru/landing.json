@@ -1,65 +1,64 @@
 {
   "about": {
-    "title": "Learn and earn cryptocurrency <br /> along with decentralized <br /> EverClub ecosystem",
-    "benefits": "With the help of LEARN2EARN, the EverClub platform helps people get an education in the field of cryptocurrencies, <br /> start earning and unites all its residents from different parts of the world into one big club of investors."
+    "title": "Учись и зарабатывай криптовалюту<br />вместе с децентрализованной<br />экосистемой EverClub",
+    "benefits": "С помощью LEARN2EARN платформа EverClub помогает людям получить образование в области криптовалют,<br />начать зарабатывать и объединяет всех своих резидентов из разных точек мира в один большой клуб инвесторов."
   },
   "stats": {
-    "totalParticipants": "Total participants",
-    "joinLast24hours": "Joined within 24 hours",
-    "alreadyEarned": "Members already earned"
+    "totalParticipants": "Всего участников",
+    "joinLast24hours": "Присоединились за 24 часа",
+    "alreadyEarned": "Участники уже заработали"
   },
   "mission": {
-    "title": "Mission",
-    "explanation": "EverClub creates the necessary infrastructure <br /> for teaching cryptocurrencies to novice <br /> investors, and proven tools for experienced <br /> investors to work in the cryptocurrency market"
+    "title": "МИССИЯ",
+    "explanation": "EverClub создает необходимую<br />инфраструктуру для обучения криптовалютам<br />начинающим инвесторам, а опытным<br />инвесторам проверенные инструменты<br />для работы на рынке криптовалют"
   },
   "video": {
-    "howEverClubWork": "How does EverClub work?",
-    "about": "Watch video 3 minutes <br /> Founder's Word"
+    "howEverClubWork": "Как работает EverClub?",
+    "about": "Смотреть видео 3 минуты<br />Слово основателя"
   },
   "results": {
-    "title": "The results of our club residents",
-    "startButton": "Start learning and earning"
+    "title": "Результаты наших резидентов клуба",
+    "startButton": "Начать учиться и зарабатывать"
   },
   "education": {
-    "title": "Educational platform",
+    "title": "Образовательная платформа",
     "courses": {
-      "title": "Courses",
-      "passCourseButton": "Pass the course",
+      "title": "Курсы",
+      "passCourseButton": "Пройти курс",
       "content": [
         {
-          "title": "Purchase or reactivation. <br /> What strategy to choose",
+          "title": "Покупать или реактивировать.<br />Какую стратегию выбрать?",
           "description": "Lorem ipsum dolor sit amet, "
         },
         {
-          "title": "Purchase or reactivation. <br /> What strategy to choose",
+          "title": "Покупать или реактивировать.<br />Какую стратегию выбрать?",
           "description": "Lorem ipsum dolor sit amet, "
         },
         {
-          "title": "Purchase or reactivation. <br /> What strategy to choose",
+          "title": "Покупать или реактивировать.<br />Какую стратегию выбрать?",
           "description": "Lorem ipsum dolor sit amet, "
         },
         {
-          "title": "Purchase or reactivation. <br /> What strategy to choose",
+          "title": "Покупать или реактивировать.<br />Какую стратегию выбрать?",
           "description": "Lorem ipsum dolor sit amet, "
         }
       ]
     }
   },
   "news": {
-    "title": "Media about everclub"
+    "title": "CМИ об EverClub"
   },
   "founder": {
     "quote": {
-      "title": "Founder Quote",
-      "text": "“Your dreams will not come true just because you want them to. Only the desire to acquire new knowledge, the desire to develop yourself and hard work will make your dreams come true and open the way to a new life for you!”"
+      "title": "Цитата основателя",
+      "text": "“Ваши мечты не станут реальностью, только потому что вы этого хотите. Лишь стремление к получению новых знаний, желание саморазвиваться и упорный труд над собой заставить мечты сбыться и открыть вам дорогу в новую жизнь!”"
     },
-    "viewBiographyButton": "View biography",
+    "viewBiographyButton": "Посмотреть биографию",
     "biography": {
-      "title": "Biography of the founder",
+      "title": "Биография основателя",
       "paragraphs": [
-        "Anthony comes from a family of emigrants: he was born in Russia and has been living with his parents in Canada since the age of 2. The family moved from Toronto to Montreal, thanks to which Anthony is fluent in both English and French.",
-        "After graduating from university, Anthony worked at a Canadian startup developing a crypto exchange. Herewas the first acquaintance with the world of trading. This direction captured Anthony so much that hedevoted all his free time to analyzing stock charts and studying trading strategies. There was plenty ofliterature on investing and trading, but most of the books were about the stock market and conservativeinvestment vehicles. As for innovations, such as cryptocurrencies, there were very few materials in thoseyears. However, the thirst for knowledge and the desire to develop gave Anthony the strength to thoroughlystudy the issue. As a result, the hobby turned into a profession, and later became the work of his wholelife.",
-        "Having achieved success as a trader and having earned the first serious capital, Anthony opens his ownbrokerage office in Toronto and becomes the founder of an analytical center in Ottawa. As a result, thedesire to scale leads Anthony to the idea of launching his own international investment and educationalstartup in order to open the world of trading, investment and making money on the Internet to thousands ofpeople. That's how EverClub was born!"
+        "Энтони выходец из семьи эмигрантов: родился в России и с 2-х летнего возраста живет с родителями в Канаде. Семья переезжала из Торонто в Монреаль, благодаря чему Энтони в совершенстве владеет как английским так и французским языками. После окончания университета, Энтони работал в канадском стартапе, разрабатывающем криптобиржу. Здесь состоялось первое знакомство с миром трейдинга. Это направление настолько захватило Энтони, что все свободное время он посвящал анализу биржевых графиков и изучению торговых стратегий. Литературы по инвестициям и трейдингу было достаточно, но большинство книг рассказывали о фондовом рынке и консервативных инвестиционных инструментах. Что же касается инноваций, как например криптовалют, материалов в те годы было крайне мало. Однако, жажда знаний и желание развиваться дали силы Энтони досконально изучить вопрос. В итоге, увлечение превратилось в профессию, а в последствии стало делом всей его жизни.",
+        "Добившись успеха как трейдер и заработав первый серьезный капитал, Энтони открывает в Торонто собственную брокерскую контору и становится фаундером аналитического центра в Оттаве. В последствие, желание масштабироваться приводит Энтони к мысли запустить собственный международный инвестиционно-образовательный стартап, чтобы открыть тысячам людей мир трейдинга, инвестиций и заработка в интернете. Так появился EverClub!"
       ]
     }
   }
