@@ -1,23 +1,11 @@
 import copy from 'copy-to-clipboard';
 import { useSnackbar } from 'notistack';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import WalletIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import CopyIcon from '@mui/icons-material/ContentCopyRounded';
-import {
-  Alert,
-  Button,
-  Divider,
-  IconButton,
-  OutlinedInput,
-  Paper,
-  Skeleton,
-  Snackbar,
-  Stack,
-  Typography,
-  styled,
-} from '@mui/material';
+import { Button, Divider, IconButton, OutlinedInput, Paper, Skeleton, Stack, Typography, styled } from '@mui/material';
 
 import { useActiveWallet } from 'app/auth';
 import { useGetUserQuery } from 'app/contract';

@@ -1,3 +1,4 @@
+import { ethers } from 'ethers';
 import { FC, useDeferredValue, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +8,7 @@ import { LoadingButton } from '@mui/lab';
 import { Collapse, TextField, Typography } from '@mui/material';
 
 import { useActiveWallet, useReferralId as useSavedReferralId } from 'app/auth';
-import { REGISTRATION_FEE, useIdToAddressQuery, useRegisterMutation } from 'app/contract';
+import { useIdToAddressQuery, useRegisterMutation, useRegisterPriceQuery } from 'app/contract';
 
 import { nasaFontFamily } from 'theme';
 
@@ -23,6 +24,7 @@ export const Register: FC = () => {
   const [savedReferralId, setSavedReferralId] = useSavedReferralId();
   const { address } = useAccount();
   const [, setActiveWallet] = useActiveWallet();
+  const { data: registerPrice } = useRegisterPriceQuery();
 
   const [referralId, setReferralId] = useState(String(savedReferralId ?? ''));
   const deferredReferralId = useDeferredValue(referralId);
@@ -59,9 +61,11 @@ export const Register: FC = () => {
       <Typography fontFamily={nasaFontFamily} fontSize={20}>
         <Trans t={t} i18nKey='auth.register.title' />
       </Typography>
-      <Typography fontFamily={nasaFontFamily} fontSize={14} color='text.secondary' mt={-1}>
-        {REGISTRATION_FEE} BNB
-      </Typography>
+      {registerPrice != null && (
+        <Typography fontFamily={nasaFontFamily} fontSize={14} color='text.secondary' mt={-1}>
+          {ethers.utils.formatEther(registerPrice)} BNB
+        </Typography>
+      )}
       <TextField
         placeholder='Referral ID'
         fullWidth
@@ -79,7 +83,7 @@ export const Register: FC = () => {
         size='large'
         fullWidth
         loading={isLoading}
-        disabled={!isSuccess}
+        disabled={!isSuccess || registerPrice == null}
         onClick={() => referralAddress && register(referralAddress)}
       >
         <Trans t={t} i18nKey='auth.register.button' />
