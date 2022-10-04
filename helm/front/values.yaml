@@ -1,0 +1,122 @@
+# Default values for front.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  registry: registry.digitalocean.com
+  repository: everclub/front
+  tag: 1.0
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+imagePullSecrets:
+  - name: registry-everclub
+
+configmap_nginx_conf: |-
+  user  nginx;
+  worker_processes auto;
+  worker_rlimit_nofile 200000;
+  
+  error_log  /var/log/nginx/error.log notice;
+  pid        /var/run/nginx.pid;
+  
+  events {
+    worker_connections  8096;
+    multi_accept        on;
+    use                 epoll;
+  }
+  
+  http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" $proxy_port '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    sendfile_max_chunk 512k;
+    keepalive_timeout  65;
+    client_max_body_size 10M;
+    keepalive_requests 100000;
+  
+    server {
+        server_name localhost;
+        listen 80 backlog=10240;
+  
+        root /usr/share/nginx/html;
+        include /etc/nginx/mime.types;
+  
+        location / {
+            try_files $uri /index.html;
+        }
+  
+        location ~ .(static)/(js|css|media)/(.+)$ {
+            try_files $uri $uri/ /$1/$2/$3;
+        }
+    }
+  }
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/issuer: letsencrypt-everclub-nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '1800'
+    nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: '1800'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '1800'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '1800'
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+#  minReplicas: 2
+#  maxReplicas: 4
+#  targetCPUAverageUtilization: 80
+#  targetMemoryAverageUtilization: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""

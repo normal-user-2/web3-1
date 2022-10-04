@@ -1,0 +1,16 @@
+ingress:
+  hosts:
+    - host: evergame.club
+      paths:
+        - /
+  tls:
+    - secretName: letsencrypt-front-nginx
+      hosts:
+        - evergame.club
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 60

@@ -1,0 +1,21 @@
+ingress:
+  hosts:
+    - host: everclub.io
+      paths:
+        - /
+  tls:
+    - secretName: letsencrypt-front-nginx
+      hosts:
+        - everclub.io
+
+resources:
+  requests:
+    cpu: 1
+    memory: 512Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 60
