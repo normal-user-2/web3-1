@@ -8,13 +8,13 @@ variables:
   IMAGE_NAME: 'everclub/front'
   APP_NAME: 'front'
   HELM_CHART: 'front'
-  KUB_NAMESPACE: 'everclub'
+  KUB_NAMESPACE: 'everclub-bsc'
   TAG_COMMIT: $CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
 
 build:
   stage: build
   tags:
-    - front
+    - deploy
   before_script:
     - pwd
     - echo $CI_COMMIT_REF_NAME
@@ -34,11 +34,14 @@ build:
 deploy:
   stage: deploy
   tags:
-    - front
+    - deploy
   before_script:
     - doctl kubernetes cluster kubeconfig save $KUBERNETES_CLUSTER
   script:
-    - helm upgrade --install --wait --atomic --debug --timeout 300s $APP_NAME ./helm/$HELM_CHART -n $KUB_NAMESPACE --set image.tag=$TAG_COMMIT --values ./helm/env/$FILENAME_ENV.yaml
+    - helm upgrade --install --wait --atomic --debug --timeout 300s
+      $APP_NAME ./helm/$HELM_CHART -n $KUB_NAMESPACE
+      --values ./helm/env/$FILENAME_ENV.yaml
+      --set image.tag=$TAG_COMMIT --set image.repository=$IMAGE_NAME
     - doctl auth remove --context default
   environment:
     name: $CI_COMMIT_REF_NAME
