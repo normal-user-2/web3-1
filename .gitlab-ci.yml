@@ -21,7 +21,7 @@ build:
     - doctl auth init
     - doctl registry login
   script:
-    - docker build --build-arg api_url=$ENV_API_URL -t $DOCKER_REGISTRY/$IMAGE_NAME:$TAG_COMMIT .
+    - docker build --build-arg API_URL=$ENV_API_URL --build-arg CHAIN_ID=$BLOCKCHAIN_ID -t $DOCKER_REGISTRY/$IMAGE_NAME:$TAG_COMMIT .
     - docker push $DOCKER_REGISTRY/$IMAGE_NAME:$TAG_COMMIT
     - docker rmi --force $DOCKER_REGISTRY/$IMAGE_NAME:$TAG_COMMIT
     - docker rmi $(docker images -f "dangling=true" -q)
