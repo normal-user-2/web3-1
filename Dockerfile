@@ -11,7 +11,10 @@ RUN apk add --no-cache curl && \
 COPY pnpm-lock.yaml ./
 RUN pnpm fetch
 
-ADD . ./
+COPY src ./src
+COPY public ./public
+COPY .env .eslintrc.cjs .prettierrc.cjs index.html package.json tsconfig.json tsconfig.node.json vite.config.ts ./
+
 RUN pnpm install -r --offline
 
 ARG API_URL
@@ -24,4 +27,4 @@ RUN pnpm build
 
 FROM nginx:1.23.1-alpine as production
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
