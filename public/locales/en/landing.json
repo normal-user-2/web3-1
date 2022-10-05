@@ -27,20 +27,16 @@
       "passCourseButton": "Pass the course",
       "content": [
         {
-          "title": "Purchase or reactivation. <br /> What strategy to choose",
-          "description": "Lorem ipsum dolor sit amet, "
+          "title": "Introduction to the market"
         },
         {
-          "title": "Purchase or reactivation. <br /> What strategy to choose",
-          "description": "Lorem ipsum dolor sit amet, "
+          "title": "Phase and Cycles in the Crypto Market"
         },
         {
-          "title": "Purchase or reactivation. <br /> What strategy to choose",
-          "description": "Lorem ipsum dolor sit amet, "
+          "title": "Structural trading"
         },
         {
-          "title": "Purchase or reactivation. <br /> What strategy to choose",
-          "description": "Lorem ipsum dolor sit amet, "
+          "title": "Trading setups"
         }
       ]
     }

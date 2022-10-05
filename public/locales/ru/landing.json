@@ -27,20 +27,16 @@
       "passCourseButton": "Пройти курс",
       "content": [
         {
-          "title": "Покупать или реактивировать.<br />Какую стратегию выбрать?",
-          "description": "Lorem ipsum dolor sit amet, "
+          "title": "Введение в рынок"
         },
         {
-          "title": "Покупать или реактивировать.<br />Какую стратегию выбрать?",
-          "description": "Lorem ipsum dolor sit amet, "
+          "title": "Фаза и циклы на крипторынке"
         },
         {
-          "title": "Покупать или реактивировать.<br />Какую стратегию выбрать?",
-          "description": "Lorem ipsum dolor sit amet, "
+          "title": "Структурный трейдинг"
         },
         {
-          "title": "Покупать или реактивировать.<br />Какую стратегию выбрать?",
-          "description": "Lorem ipsum dolor sit amet, "
+          "title": "Сетапы для торговли"
         }
       ]
     }

@@ -600,6 +600,7 @@ education
     gap: 30px;
     .item {
       margin-bottom: 5px;
+      min-height: 250px;
     }
   }
 
@@ -644,13 +645,16 @@ education
     border-radius: 12px;
     width: 177px;
     height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    place-items: center;
   }
   .item_button p {
     font-weight: 500;
     font-size: 17px;
     line-height: 25px;
     color: #ffffff;
-    padding: 17.5px 15px 17.5px 40px;
   }
 
   /*

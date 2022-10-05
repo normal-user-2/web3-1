@@ -208,9 +208,9 @@ export const Landing: FC = () => {
                       <Trans t={t} i18nKey={`education.courses.content.${key}.title`} />
                     </span>
                     <img className='edu_line' src='/assets/images/education/line.svg' />
-                    <p>
+                    {/* <p>
                       <Trans t={t} i18nKey={`education.courses.content.${key}.description`} />
-                    </p>
+                    </p> */}
                     <Link to='/login'>
                       <div className='item_button'>
                         <p>
@@ -280,7 +280,16 @@ export const Landing: FC = () => {
         </div>
       </section>
 
-      <Dialog open={open} onClose={handleClose} maxWidth='md'>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth='md'
+        sx={{
+          '& .MuiDialog-paper': {
+            p: 4,
+          },
+        }}
+      >
         <DialogTitle
           sx={{
             display: 'flex',
