@@ -49,35 +49,31 @@ export interface ContractCallOverrides {
   gasLimit?: number;
 }
 export type EverclubContractEvents =
-  | 'AddedReferralLink'
   | 'MissedEthPayment'
   | 'NewUserPlace'
-  | 'ReferralPaymentTransfer'
-  | 'RegisteredByReferralLink'
+  | 'ReferrerPaymentTransfer'
+  | 'RegisteredByReferrer'
   | 'Registration'
   | 'Reinvest'
-  | 'UpdatedReferralLink'
   | 'Upgrade';
 export interface EverclubContractEventsContext {
-  AddedReferralLink(...parameters: any): EventFilter;
   MissedEthPayment(...parameters: any): EventFilter;
   NewUserPlace(...parameters: any): EventFilter;
-  ReferralPaymentTransfer(...parameters: any): EventFilter;
-  RegisteredByReferralLink(...parameters: any): EventFilter;
+  ReferrerPaymentTransfer(...parameters: any): EventFilter;
+  RegisteredByReferrer(...parameters: any): EventFilter;
   Registration(...parameters: any): EventFilter;
   Reinvest(...parameters: any): EventFilter;
-  UpdatedReferralLink(...parameters: any): EventFilter;
   Upgrade(...parameters: any): EventFilter;
 }
 export type EverclubContractMethodNames =
   | 'new'
   | 'LAST_PLATFORM'
-  | 'PLATFORM_COMMISSION_PERCENT'
+  | 'PLATFORM_COMMISSION_ACTIVE_PERCENT'
+  | 'PLATFORM_COMMISSION_BUY_PERCENT'
   | 'START_PLATFORM'
   | 'addressIds'
   | 'buyNewLevel'
   | 'findReferrer'
-  | 'idToAddress'
   | 'isUserPlatformFilled'
   | 'levelQueueUser'
   | 'nextUserId'
@@ -86,18 +82,11 @@ export type EverclubContractMethodNames =
   | 'platformPricesUnActive'
   | 'reactivatePlatform'
   | 'registrationExt'
-  | 'toBytes'
-  | 'updateReferralLink'
   | 'userActivePlatform'
   | 'userExists'
-  | 'userLinks'
   | 'userPlatformMembersCount'
   | 'users'
   | 'usersMatrix';
-export interface AddedReferralLinkEventEmittedResponse {
-  referrer: string;
-  link: Arrayish;
-}
 export interface MissedEthPaymentEventEmittedResponse {
   receiver: string;
   from: string;
@@ -109,7 +98,7 @@ export interface NewUserPlaceEventEmittedResponse {
   platform: BigNumberish;
   place: BigNumberish;
 }
-export interface ReferralPaymentTransferEventEmittedResponse {
+export interface ReferrerPaymentTransferEventEmittedResponse {
   buyReceiver: string;
   buyAmount: BigNumberish;
   activateReceiver: string;
@@ -117,7 +106,7 @@ export interface ReferralPaymentTransferEventEmittedResponse {
   feeReceiver: string;
   fee: BigNumberish;
 }
-export interface RegisteredByReferralLinkEventEmittedResponse {
+export interface RegisteredByReferrerEventEmittedResponse {
   user: string;
   referrer: string;
 }
@@ -133,10 +122,6 @@ export interface ReinvestEventEmittedResponse {
   currentReferrer: string;
   caller: string;
   platform: BigNumberish;
-}
-export interface UpdatedReferralLinkEventEmittedResponse {
-  referrer: string;
-  link: Arrayish;
 }
 export interface UpgradeEventEmittedResponse {
   user: string;
@@ -194,7 +179,14 @@ export interface EverclubContract {
    * StateMutability: view
    * Type: function
    */
-  PLATFORM_COMMISSION_PERCENT(overrides?: ContractCallOverrides): Promise<BigNumber>;
+  PLATFORM_COMMISSION_ACTIVE_PERCENT(overrides?: ContractCallOverrides): Promise<BigNumber>;
+  /**
+   * Payable: false
+   * Constant: true
+   * StateMutability: view
+   * Type: function
+   */
+  PLATFORM_COMMISSION_BUY_PERCENT(overrides?: ContractCallOverrides): Promise<BigNumber>;
   /**
    * Payable: false
    * Constant: true
@@ -227,14 +219,6 @@ export interface EverclubContract {
    * @param platform Type: uint8, Indexed: false
    */
   findReferrer(user: string, platform: BigNumberish, overrides?: ContractCallOverrides): Promise<string>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   * @param userId Type: uint256, Indexed: false
-   */
-  idToAddress(userId: BigNumberish, overrides?: ContractCallOverrides): Promise<string>;
   /**
    * Payable: false
    * Constant: true
@@ -301,30 +285,9 @@ export interface EverclubContract {
    * Constant: false
    * StateMutability: payable
    * Type: function
-   * @param referralLink Type: bytes, Indexed: false
+   * @param referrer Type: address, Indexed: false
    */
-  registrationExt(referralLink: Arrayish, overrides?: ContractTransactionOverrides): Promise<ContractTransaction>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: pure
-   * Type: function
-   * @param a Type: address, Indexed: false
-   */
-  toBytes(a: string, overrides?: ContractCallOverrides): Promise<string>;
-  /**
-   * Payable: false
-   * Constant: false
-   * StateMutability: nonpayable
-   * Type: function
-   * @param oldLink Type: bytes, Indexed: false
-   * @param newLink Type: bytes, Indexed: false
-   */
-  updateReferralLink(
-    oldLink: Arrayish,
-    newLink: Arrayish,
-    overrides?: ContractTransactionOverrides,
-  ): Promise<ContractTransaction>;
+  registrationExt(referrer: string, overrides?: ContractTransactionOverrides): Promise<ContractTransaction>;
   /**
    * Payable: false
    * Constant: true
@@ -342,14 +305,6 @@ export interface EverclubContract {
    * @param user Type: address, Indexed: false
    */
   userExists(user: string, overrides?: ContractCallOverrides): Promise<boolean>;
-  /**
-   * Payable: false
-   * Constant: true
-   * StateMutability: view
-   * Type: function
-   * @param parameter0 Type: bytes, Indexed: false
-   */
-  userLinks(parameter0: Arrayish, overrides?: ContractCallOverrides): Promise<string>;
   /**
    * Payable: false
    * Constant: true

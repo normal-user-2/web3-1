@@ -1,18 +1,8 @@
 [
   {
     "inputs": [{ "internalType": "address", "name": "_treasury", "type": "address" }],
-    "name": "constructor",
     "stateMutability": "nonpayable",
     "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      { "indexed": true, "internalType": "address", "name": "referrer", "type": "address" },
-      { "indexed": false, "internalType": "bytes", "name": "link", "type": "bytes" }
-    ],
-    "name": "AddedReferralLink",
-    "type": "event"
   },
   {
     "anonymous": false,
@@ -45,7 +35,7 @@
       { "indexed": true, "internalType": "address", "name": "feeReceiver", "type": "address" },
       { "indexed": false, "internalType": "uint256", "name": "fee", "type": "uint256" }
     ],
-    "name": "ReferralPaymentTransfer",
+    "name": "ReferrerPaymentTransfer",
     "type": "event"
   },
   {
@@ -54,7 +44,7 @@
       { "indexed": true, "internalType": "address", "name": "user", "type": "address" },
       { "indexed": true, "internalType": "address", "name": "referrer", "type": "address" }
     ],
-    "name": "RegisteredByReferralLink",
+    "name": "RegisteredByReferrer",
     "type": "event"
   },
   {
@@ -83,15 +73,6 @@
   {
     "anonymous": false,
     "inputs": [
-      { "indexed": true, "internalType": "address", "name": "referrer", "type": "address" },
-      { "indexed": false, "internalType": "bytes", "name": "link", "type": "bytes" }
-    ],
-    "name": "UpdatedReferralLink",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
       { "indexed": true, "internalType": "address", "name": "user", "type": "address" },
       { "indexed": true, "internalType": "address", "name": "referrer", "type": "address" },
       { "indexed": false, "internalType": "uint8", "name": "platform", "type": "uint8" }
@@ -108,7 +89,14 @@
   },
   {
     "inputs": [],
-    "name": "PLATFORM_COMMISSION_PERCENT",
+    "name": "PLATFORM_COMMISSION_ACTIVE_PERCENT",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PLATFORM_COMMISSION_BUY_PERCENT",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -141,13 +129,6 @@
     ],
     "name": "findReferrer",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "userId", "type": "uint256" }],
-    "name": "idToAddress",
-    "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -210,27 +191,10 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bytes", "name": "referralLink", "type": "bytes" }],
+    "inputs": [{ "internalType": "address", "name": "referrer", "type": "address" }],
     "name": "registrationExt",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "a", "type": "address" }],
-    "name": "toBytes",
-    "outputs": [{ "internalType": "bytes", "name": "b", "type": "bytes" }],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "bytes", "name": "oldLink", "type": "bytes" },
-      { "internalType": "bytes", "name": "newLink", "type": "bytes" }
-    ],
-    "name": "updateReferralLink",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -247,13 +211,6 @@
     "inputs": [{ "internalType": "address", "name": "user", "type": "address" }],
     "name": "userExists",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
-    "name": "userLinks",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
