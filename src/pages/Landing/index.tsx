@@ -131,28 +131,43 @@ export const Landing: FC = () => {
             </h2>
 
             <div className='result__items'>
-              {[1, 2].map((key) => (
-                <div className='result__item' key={key}>
+              {[
+                {
+                  id: 17,
+                  people: 158,
+                  usd: '78 075$',
+                  bnb: '175 BNB',
+                  date: '10.05.2022',
+                },
+                {
+                  id: 78,
+                  people: 254,
+                  usd: '99 929$',
+                  bnb: '241 BNB',
+                  date: '28.06.2022',
+                },
+              ].map(({ id, people, usd, bnb, date }) => (
+                <div className='result__item' key={id}>
                   <div className='result__item-header'>
                     <img src='./assets/images/result/binance.svg' alt='' />
                     <div className='text__wrapper'>
-                      <span className='result__item-id style_text'>ID 1283</span>
-                      <span className='result__item-people style_text'>226</span>
+                      <span className='result__item-id style_text'>ID {id}</span>
+                      <span className='result__item-people style_text'>{people}</span>
                     </div>
                   </div>
 
                   <ul className='result__item-blog style_color'>
                     <li>
                       <span>Balance USD</span>
-                      <p className='style_color'>292 075$</p>
+                      <p className='style_color'>{usd}</p>
                     </li>
                     <li>
-                      <span>Balance BSC</span>
-                      <p className='style_color'>175 BSC</p>
+                      <span>Balance BNB</span>
+                      <p className='style_color'>{bnb}</p>
                     </li>
                     <li>
                       <span>Date of registration</span>
-                      <p className='style_color'>10.05.2022</p>
+                      <p className='style_color'>{date}</p>
                     </li>
                   </ul>
                 </div>
@@ -263,18 +278,10 @@ export const Landing: FC = () => {
 
           <div className='mass-media'>
             <div className='brands'>
-              <Link to='/login'>
-                <img src='/assets/images/news/rbk.svg' />
-              </Link>
-              <Link to='/login'>
-                <img src='/assets/images/news/lenta.svg' />
-              </Link>
-              <Link to='/login'>
-                <img src='/assets/images/news/forbes.svg' />
-              </Link>
-              <Link to='/login'>
-                <img src='/assets/images/news/Tech.svg' />
-              </Link>
+              <img src='/assets/images/news/rbk.svg' />
+              <img src='/assets/images/news/lenta.svg' />
+              <img src='/assets/images/news/forbes.svg' />
+              <img src='/assets/images/news/Tech.svg' />
             </div>
           </div>
         </div>
