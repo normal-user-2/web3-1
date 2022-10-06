@@ -2,13 +2,13 @@ import { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { SocialIcon, keyFor } from 'react-social-icons';
 import { colorFor } from 'react-social-icons/build/networks';
-import { useNetwork } from 'wagmi';
 
 import { Box, Container, Skeleton, Stack, Typography, css, styled } from '@mui/material';
 
 import { ReactComponent as LogoCube } from 'assets/LogoCube.svg';
 import { ReactComponent as LogoNameIcon } from 'assets/LogoName.svg';
 
+import { chains } from 'app/chains';
 import { useContractAddress } from 'app/contract';
 
 import { DocumentLink } from 'components/DocumentLink';
@@ -48,7 +48,7 @@ const SocialLink = styled(SocialIcon, {
 export const Footer: FC = () => {
   const { t } = useTranslation('shared');
   const { data: contractAddress } = useContractAddress();
-  const { chains } = useNetwork();
+  // using static import, because useNetwork returns data only with connected metamask
   const blockscanURL = chains.find(({ id }) => id === +import.meta.env.VITE_CHAIN_ID)?.blockExplorers?.default.url;
 
   return (

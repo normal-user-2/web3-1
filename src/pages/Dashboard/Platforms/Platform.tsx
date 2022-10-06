@@ -162,7 +162,6 @@ const PlatformToActivate: FC<Pick<BaseProps, 'level' | 'membersCount' | 'reactiv
   return (
     <PlatformBase
       {...props}
-      locked
       title={
         <Typography color='primary.main' textAlign='center'>
           {price == null ? <Skeleton width={50} /> : `${formatEth(price)} BNB`}

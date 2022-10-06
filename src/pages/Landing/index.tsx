@@ -19,7 +19,8 @@ const formatNumber = (e: number) => {
 };
 
 export const Landing: FC = () => {
-  const { t } = useTranslation('landing');
+  const { t, i18n } = useTranslation('landing');
+  const lang = i18n.language.slice(0, 2);
   const { data } = useGetStatistic();
   const { data: BNBPrice } = useGetBNBPrice();
 
@@ -195,13 +196,13 @@ export const Landing: FC = () => {
             </div>
             <div className='education_choice'>
               <Link to='/login'>
-                <img src='/assets/images/education/instruments.svg' />
+                <img src={`/assets/images/education/introduction${lang === 'ru' ? '_ru' : ''}.png`} />
               </Link>
               <Link to='/login'>
-                <img src='/assets/images/education/cycles.svg' />
+                <img src={`/assets/images/education/instruments${lang === 'ru' ? '_ru' : ''}.png`} />
               </Link>
               <Link to='/login'>
-                <img src='/assets/images/education/meeting.svg' />
+                <img src={`/assets/images/education/cycles${lang === 'ru' ? '_ru' : ''}.png`} />
               </Link>
             </div>
           </div>
@@ -307,7 +308,7 @@ export const Landing: FC = () => {
           }}
         >
           <Stack>
-            <Typography textTransform='uppercase'>
+            <Typography fontWeight='300' fontSize='30' textTransform='uppercase' letterSpacing='0.3em'>
               <Trans t={t} i18nKey='founder.biography.title' />
             </Typography>
             <img className='biography_line' src='/assets/images/education/line.svg' />
