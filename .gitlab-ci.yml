@@ -24,7 +24,7 @@ build:
     - docker build --build-arg API_URL=$ENV_API_URL --build-arg CHAIN_ID=$BLOCKCHAIN_ID -t $DOCKER_REGISTRY/$IMAGE_NAME:$TAG_COMMIT .
     - docker push $DOCKER_REGISTRY/$IMAGE_NAME:$TAG_COMMIT
     - docker rmi --force $DOCKER_REGISTRY/$IMAGE_NAME:$TAG_COMMIT
-    - docker rmi $(docker images -f "dangling=true" -q)
+    - docker rmi $(docker images -f "dangling=true" -q) --force
   environment:
     name: $CI_COMMIT_REF_NAME
   only:
