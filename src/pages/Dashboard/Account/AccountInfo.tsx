@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { FC } from 'react';
 
 import CurrencyIcon from '@mui/icons-material/CurrencyBitcoinRounded';
@@ -23,7 +24,7 @@ const Row = styled('div')`
 `;
 
 const calcOverallProfit = ({ wallet }: User) => {
-  return Number(wallet.profit_referrals) + Number(wallet.profit_reinvest);
+  return (+wallet.profit_referrals + +wallet.profit_reinvest) * 1e-18;
 };
 
 export const AccountInfo: FC = () => {
@@ -52,7 +53,7 @@ export const AccountInfo: FC = () => {
         <Row sx={{ gap: 1 }}>
           <LinkIcon color='primary' fontSize='small' />
           <Typography fontSize={18} sx={whiteNeonFilter}>
-            {contractUser == null ? <Skeleton width={40} /> : contractUser.childrenAmount?.toString()}
+            {user == null ? <Skeleton width={40} /> : user.referrals_count}
           </Typography>
         </Row>
       </Row>
@@ -69,29 +70,45 @@ export const AccountInfo: FC = () => {
       >
         <Stack alignItems='center'>
           <Typography fontSize={20} lineHeight={1} display='flex'>
-            {user == null || bnbPrice == null ? <Skeleton width={40} /> : `$${calcOverallProfit(user) * bnbPrice}`}
+            {user == null || bnbPrice == null ? (
+              <Skeleton width={40} />
+            ) : (
+              `$${_.round(calcOverallProfit(user) * bnbPrice, 5)}`
+            )}
             <Box component='span' color='primary.main' fontSize={22}>
               *
             </Box>
           </Typography>
-          <Typography>{user == null ? <Skeleton width={40} /> : `BNB ${calcOverallProfit(user)}`}</Typography>
+          <Typography>
+            {user == null ? <Skeleton width={40} /> : `BNB ${_.round(calcOverallProfit(user), 5)}`}
+          </Typography>
         </Stack>
         <Divider />
         <Stack width='100%' gap={1}>
           <Row sx={{ justifyContent: 'flex-start', gap: 1 }}>
             <CurrencyIcon />
-            <Typography>{user == null ? <Skeleton width={40} /> : `BNB ${calcOverallProfit(user)}`}</Typography>
+            <Typography>
+              {user == null ? <Skeleton width={40} /> : `BNB ${_.round(calcOverallProfit(user), 5)}`}
+            </Typography>
           </Row>
           <Row sx={{ justifyContent: 'flex-start', gap: 1 }}>
             <LinkIcon />
             <Typography>
-              {user == null ? <Skeleton width={40} /> : `BNB ${Number(user.wallet.profit_referrals)}`}
+              {user == null ? (
+                <Skeleton width={40} />
+              ) : (
+                `BNB ${_.round(Number(user.wallet.profit_referrals) * 1e-18, 5)}`
+              )}
             </Typography>
           </Row>
           <Row sx={{ justifyContent: 'flex-start', gap: 1 }}>
             <PartnerNetworkIcon sx={{ p: 0.5 }} />
             <Typography>
-              {user == null ? <Skeleton width={40} /> : `BNB ${Number(user.wallet.profit_reinvest)}`}
+              {user == null ? (
+                <Skeleton width={40} />
+              ) : (
+                `BNB ${_.round(Number(user.wallet.profit_reinvest) * 1e-18, 5)}`
+              )}
             </Typography>
           </Row>
         </Stack>

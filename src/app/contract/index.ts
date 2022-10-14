@@ -223,56 +223,70 @@ export const useIdToAddressQuery = (contractId?: number) => {
   return { address: result.data, ...result } as const;
 };
 
-export const useBuyPlatformMutation = (level: number) => {
+export const useBuyPlatformMutation = (
+  level: number,
+  options?: Omit<UseMutationOptions<void, unknown, BigNumber, unknown>, 'mutationKey' | 'mutationFn'>,
+) => {
   const queryClient = useQueryClient();
   const contract = useEverclubContract();
   const { address } = useAccount();
-  return useMutation(['contract', 'buyPlatform', String(level)], async (price: BigNumber) => {
-    if (contract == null) {
-      throw new Error('Wallet is not connected');
-    }
-    const tx = await contract.buyNewLevel(level, { value: price }).catch((error) => {
-      if (error.code === 'UNPREDICTABLE_GAS_LIMIT') {
-        // reverted tx
-        throw new Error(error.reason.replace(/execution reverted: /g, ''));
+  return useMutation(
+    ['contract', 'buyPlatform', String(level)],
+    async (price: BigNumber) => {
+      if (contract == null) {
+        throw new Error('Wallet is not connected');
       }
-      const rpcMessage = error.data?.message;
-      if (rpcMessage != null) {
-        const matched = rpcMessage.match(/^err: (.*?):/);
-        throw new Error(matched?.[1] ?? rpcMessage);
-      }
-      throw error;
-    });
-    await tx?.wait();
-    queryClient.invalidateQueries(['contract', 'platform', address, String(level)]);
-    queryClient.invalidateQueries(['api', 'user', 'platforms']);
-  });
+      const tx = await contract.buyNewLevel(level, { value: price }).catch((error) => {
+        if (error.code === 'UNPREDICTABLE_GAS_LIMIT') {
+          // reverted tx
+          throw new Error(error.reason.replace(/execution reverted: /g, ''));
+        }
+        const rpcMessage = error.data?.message;
+        if (rpcMessage != null) {
+          const matched = rpcMessage.match(/^err: (.*?):/);
+          throw new Error(matched?.[1] ?? rpcMessage);
+        }
+        throw error;
+      });
+      await tx?.wait();
+      queryClient.invalidateQueries(['contract', 'platform', address, String(level)]);
+      queryClient.invalidateQueries(['api', 'user', 'platforms']);
+    },
+    options,
+  );
 };
 
-export const useReactivatePlatformMutation = (level: number) => {
+export const useReactivatePlatformMutation = (
+  level: number,
+  options?: Omit<UseMutationOptions<void, unknown, BigNumber, unknown>, 'mutationFn' | 'mutationKey'>,
+) => {
   const contract = useEverclubContract();
   const queryClient = useQueryClient();
   const { address } = useAccount();
-  return useMutation(['contract', 'reactivatePlatform', String(level)], async (price: BigNumber) => {
-    if (contract == null) {
-      throw new Error('Wallet is not connected');
-    }
-    const tx = await contract.reactivatePlatform(level, { value: price }).catch((error) => {
-      if (error.code === 'UNPREDICTABLE_GAS_LIMIT') {
-        // reverted tx
-        throw new Error(error.reason.replace(/execution reverted: /g, ''));
+  return useMutation(
+    ['contract', 'reactivatePlatform', String(level)],
+    async (price: BigNumber) => {
+      if (contract == null) {
+        throw new Error('Wallet is not connected');
       }
-      const rpcMessage = error.data?.message;
-      if (rpcMessage != null) {
-        const matched = rpcMessage.match(/^err: (.*?):/);
-        throw new Error(matched?.[1] ?? rpcMessage);
-      }
-      throw error;
-    });
-    await tx?.wait();
-    queryClient.invalidateQueries(['contract', 'platform', address, String(level)]);
-    queryClient.invalidateQueries(['api', 'user', 'platforms']);
-  });
+      const tx = await contract.reactivatePlatform(level, { value: price }).catch((error) => {
+        if (error.code === 'UNPREDICTABLE_GAS_LIMIT') {
+          // reverted tx
+          throw new Error(error.reason.replace(/execution reverted: /g, ''));
+        }
+        const rpcMessage = error.data?.message;
+        if (rpcMessage != null) {
+          const matched = rpcMessage.match(/^err: (.*?):/);
+          throw new Error(matched?.[1] ?? rpcMessage);
+        }
+        throw error;
+      });
+      await tx?.wait();
+      queryClient.invalidateQueries(['contract', 'platform', address, String(level)]);
+      queryClient.invalidateQueries(['api', 'user', 'platforms']);
+    },
+    options,
+  );
 };
 
 export const useGetPlatformQuery = (level: number, address?: string) => {

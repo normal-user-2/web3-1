@@ -71,7 +71,7 @@ export const Landing: FC = () => {
               {data == null || BNBPrice == null ? (
                 <Skeleton />
               ) : (
-                <span>${formatNumber(data.all_bnb * 10e-18 * BNBPrice)}</span>
+                <span>${formatNumber(data.all_bnb * 1e-18 * BNBPrice)}</span>
               )}
             </div>
           </div>

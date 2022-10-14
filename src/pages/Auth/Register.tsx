@@ -47,7 +47,9 @@ export const Register: FC = () => {
       navigate('/dashboard');
     },
   });
-  const registrationErrorReason = error?.message;
+  const registrationErrorReason = error?.message.startsWith('insufficient funds')
+    ? t('insufficientFunds')
+    : error?.message;
 
   useEffect(() => {
     if (savedReferralId != null && isReferralIdError) {

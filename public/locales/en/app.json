@@ -77,5 +77,6 @@
       "reactivated": "Reactiv.",
       "usersOnPlatform": "Tiers"
     }
-  }
+  },
+  "insufficientFunds": "There's no enough funds."
 }

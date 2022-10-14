@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import { useSnackbar } from 'notistack';
 import { FC, ReactNode } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useAccount } from 'wagmi';
@@ -123,8 +124,15 @@ const PlatformToBuy: FC<Props> = ({ level }) => {
   const { t } = useTranslation('app');
   const readonly = useIsReadonly();
 
+  const { enqueueSnackbar } = useSnackbar();
   const { price, isSuccess: isBuyPriceSuccess } = useBuyPriceQuery(level);
-  const { mutate: buy, isLoading: isBuying } = useBuyPlatformMutation(level);
+  const { mutate: buy, isLoading: isBuying } = useBuyPlatformMutation(level, {
+    onError: (error) => {
+      if (/insufficient funds for/i.test(error as string)) {
+        enqueueSnackbar(t('insufficientFunds'), { variant: 'error' });
+      }
+    },
+  });
   const [address] = useActiveWallet();
   const { platform: previousPlatform } = useGetPlatformQuery(level - 1, address);
 
@@ -155,10 +163,18 @@ const PlatformToBuy: FC<Props> = ({ level }) => {
 
 const PlatformToActivate: FC<Pick<BaseProps, 'level' | 'membersCount' | 'reactivateAmount'>> = (props) => {
   const { t } = useTranslation('app');
-
   const readonly = useIsReadonly();
+
+  const { enqueueSnackbar } = useSnackbar();
+
   const { price, isSuccess: isBuyPriceSuccess } = useReactivatePriceQuery(props.level);
-  const { mutate: reactivate, isLoading } = useReactivatePlatformMutation(props.level);
+  const { mutate: reactivate, isLoading } = useReactivatePlatformMutation(props.level, {
+    onError: (error) => {
+      if (/insufficient funds for/i.test(error as string)) {
+        enqueueSnackbar(t('insufficientFunds'), { variant: 'error' });
+      }
+    },
+  });
   return (
     <PlatformBase
       {...props}
