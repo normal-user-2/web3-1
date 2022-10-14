@@ -99,7 +99,7 @@ export const useGetReferrals = (walletId?: number) => {
 interface Statistic {
   all_count: number;
   users_invited_last_24_hour: number;
-  all_trx: number;
+  all_bnb: number;
 }
 
 export const useGetStatistic = () => {

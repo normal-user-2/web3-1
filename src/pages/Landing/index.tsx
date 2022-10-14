@@ -68,7 +68,11 @@ export const Landing: FC = () => {
               <p>
                 <Trans t={t} i18nKey='stats.alreadyEarned' />
               </p>
-              {data == null || BNBPrice == null ? <Skeleton /> : <span>${formatNumber(data.all_trx * BNBPrice)}</span>}
+              {data == null || BNBPrice == null ? (
+                <Skeleton />
+              ) : (
+                <span>${formatNumber(data.all_bnb * 10e-18 * BNBPrice)}</span>
+              )}
             </div>
           </div>
           <div className='mouse'>
