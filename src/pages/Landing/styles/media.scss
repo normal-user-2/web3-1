@@ -560,12 +560,8 @@ adaptive
   }
 
   @media (max-width: 767px) {
-    /* .biography {
-        height: 400px;
-    } */
     .biography_container {
       flex-direction: column;
-      height: 50px;
       justify-content: start;
     }
     .biography-text {

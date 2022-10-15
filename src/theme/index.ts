@@ -66,9 +66,7 @@ export const theme = createTheme({
         }
 
         /* Scrollbar */
-        html,
-        body,
-        #root {
+        body {
           overflow: overlay;
         }
         * {

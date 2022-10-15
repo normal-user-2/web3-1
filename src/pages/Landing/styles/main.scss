@@ -355,7 +355,7 @@ video-work
     height: 900px;
     background-image: url(/assets/images/video-work/bg.png);
     background-size: cover;
-    background-position: center;
+    background-position: right;
     display: flex;
     flex-direction: column;
   }
@@ -662,7 +662,7 @@ biography
  */
 
   .biography {
-    height: 700px;
+    max-height: 700px;
     display: flex;
     width: 100%;
     background: #1e2b49;

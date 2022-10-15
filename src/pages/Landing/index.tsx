@@ -6,7 +6,17 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import CloseIcon from '@mui/icons-material/CloseRounded';
-import { Button, Dialog, DialogContent, DialogTitle, IconButton, Skeleton, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  Container,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Skeleton,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import { useGetBNBPrice, useGetStatistic } from 'app/api';
 
@@ -295,37 +305,50 @@ export const Landing: FC = () => {
       <Dialog
         open={open}
         onClose={handleClose}
-        maxWidth='md'
+        fullScreen
         sx={{
           '& .MuiDialog-paper': {
-            p: 4,
+            py: 4,
+            px: 2,
+            borderRadius: 0,
+            background:
+              'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/assets/images/biography/bg.png) center/cover no-repeat',
+            height: {
+              xs: 'unset',
+              sm: 500,
+            },
+            maxHeight: '100vh',
           },
         }}
       >
-        <DialogTitle
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            p: 0,
-            pb: 2,
-          }}
-        >
-          <Stack>
-            <Typography fontWeight='300' fontSize='30' textTransform='uppercase' letterSpacing='0.3em'>
-              <Trans t={t} i18nKey='founder.biography.title' />
-            </Typography>
-            <img className='biography_line' src='/assets/images/education/line.svg' />
-          </Stack>
-          <IconButton onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent sx={{ p: 0 }}>
-          {(t('founder.biography.paragraphs', { returnObjects: true }) as string[]).map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
-        </DialogContent>
+        <Container maxWidth='md'>
+          <DialogTitle
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              p: 0,
+              mb: 2,
+            }}
+          >
+            <Stack>
+              <Typography fontWeight='300' fontSize='30' textTransform='uppercase' letterSpacing='0.3em'>
+                <Trans t={t} i18nKey='founder.biography.title' />
+              </Typography>
+              <img className='biography_line' src='/assets/images/education/line.svg' />
+            </Stack>
+            <IconButton onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+        </Container>
+        <Container maxWidth='md' sx={{ overflow: 'overlay' }}>
+          <DialogContent sx={{ p: 0 }}>
+            {(t('founder.biography.paragraphs', { returnObjects: true }) as string[]).map((text, index) => (
+              <p key={index}>{text}</p>
+            ))}
+          </DialogContent>
+        </Container>
       </Dialog>
     </main>
   );
