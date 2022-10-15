@@ -161,7 +161,9 @@ const PlatformToBuy: FC<Props> = ({ level }) => {
   );
 };
 
-const PlatformToActivate: FC<Pick<BaseProps, 'level' | 'membersCount' | 'reactivateAmount'>> = (props) => {
+const PlatformToActivate: FC<
+  Pick<BaseProps, 'level' | 'membersCount' | 'reactivateAmount'> & { readyToReactivate: boolean }
+> = (props) => {
   const { t } = useTranslation('app');
   const readonly = useIsReadonly();
 
@@ -189,7 +191,7 @@ const PlatformToActivate: FC<Pick<BaseProps, 'level' | 'membersCount' | 'reactiv
           color='primary'
           loading={!isBuyPriceSuccess || isLoading}
           onClick={() => price != null && reactivate(price)}
-          disabled={readonly}
+          disabled={readonly || !props.readyToReactivate}
         >
           <Trans t={t} i18nKey='dashboard.platform.reactivate' />
         </LoadingButton>
@@ -221,11 +223,12 @@ export const Platform: FC<Props> = ({ level }) => {
     return <PlatformToBuy level={level} />;
   }
 
-  if (platform.readyToReactivate) {
-    return (
-      <PlatformToActivate level={level} membersCount={platform.membersCount} reactivateAmount={reactivateAmount} />
-    );
-  }
-
-  return <PlatformBase level={level} membersCount={platform.membersCount} reactivateAmount={reactivateAmount} />;
+  return (
+    <PlatformToActivate
+      level={level}
+      membersCount={platform.membersCount}
+      reactivateAmount={reactivateAmount}
+      readyToReactivate={platform.readyToReactivate}
+    />
+  );
 };

@@ -6,6 +6,7 @@
       "description": "To proceed connect wallet using instruction below",
       "button": "Connect wallet"
     },
+    "noMetamask": "No metamask extension detected",
     "login": {
       "title": "Login to your personal account",
       "description": "To view account ID or BSC wallet",

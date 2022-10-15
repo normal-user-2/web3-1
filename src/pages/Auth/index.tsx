@@ -1,8 +1,9 @@
+import { useSnackbar } from 'notistack';
 import { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { SocialIcon } from 'react-social-icons';
 import { colorFor } from 'react-social-icons/build/networks';
-import { useAccount, useConnect } from 'wagmi';
+import { ConnectorNotFoundError, useAccount, useConnect } from 'wagmi';
 
 import { LoadingButton } from '@mui/lab';
 import { Avatar, Button, Divider, Unstable_Grid2 as Grid, Paper, Stack, Typography } from '@mui/material';
@@ -20,7 +21,7 @@ export const Auth: FC = () => {
   const { t } = useTranslation('app');
   const { isConnected } = useAccount();
   const { connectAsync, connectors, isLoading } = useConnect();
-
+  const { enqueueSnackbar } = useSnackbar();
   const connectWallet = (
     <Stack my={5} gap={2}>
       <Typography fontFamily={nasaFontFamily} fontSize={20}>
@@ -35,7 +36,13 @@ export const Auth: FC = () => {
         size='large'
         fullWidth
         loading={isLoading}
-        onClick={async () => await connectAsync({ connector: connectors[0], chainId: +import.meta.env.VITE_CHAIN_ID })}
+        onClick={() =>
+          connectAsync({ connector: connectors[0], chainId: +import.meta.env.VITE_CHAIN_ID }).catch((error) => {
+            if (error instanceof ConnectorNotFoundError) {
+              enqueueSnackbar(t('auth.noMetamask'), { variant: 'error' });
+            }
+          })
+        }
       >
         <Trans t={t} i18nKey='auth.connectWallet.button' />
       </LoadingButton>
@@ -46,8 +53,6 @@ export const Auth: FC = () => {
     <>
       <Login />
       <Register />
-      <Divider sx={{ mx: -2 }} />
-      <OpenReadonly />
     </>
   );
 
@@ -68,6 +73,8 @@ export const Auth: FC = () => {
             <Typography fontSize={35}>BSC</Typography>
             <Divider sx={{ mx: -2 }} />
             {isConnected ? authForm : connectWallet}
+            <Divider sx={{ mx: -2 }} />
+            <OpenReadonly />
           </Stack>
         </Paper>
       </Grid>

@@ -4,7 +4,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Unstable_Grid2 as Grid } from '@mui/material';
 
 import { useActiveWallet } from 'app/auth';
-import { useLoadAccount } from 'app/contract';
 
 import { AccountInfo } from './Account/AccountInfo';
 import { Badges } from './Account/Badges';
@@ -15,7 +14,6 @@ import { Platforms } from './Platforms';
 
 export const Dashboard: FC = () => {
   const [activeWallet] = useActiveWallet();
-  useLoadAccount({ enabled: activeWallet != null });
 
   if (activeWallet == null) {
     return <Navigate to='/login' />;

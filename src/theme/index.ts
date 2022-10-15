@@ -131,6 +131,7 @@ export const theme = createTheme({
             color: black;
             box-shadow: 0px 2px 15px ${theme.palette.primary.main}53;
             &:hover {
+              color: black;
               background-color: ${theme.palette.primary.light};
               box-shadow: 0px 6px 15px ${theme.palette.primary.main}53;
             }

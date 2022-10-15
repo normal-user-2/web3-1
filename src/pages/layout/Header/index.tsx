@@ -95,7 +95,15 @@ export const Header: FC = () => {
               <Route
                 path='/dashboard/*'
                 element={
-                  <>
+                  <Box
+                    sx={{
+                      display: {
+                        xs: 'block',
+                        sm: 'flex',
+                      },
+                      gap: 2,
+                    }}
+                  >
                     <StyledNavLink to='/dashboard' end>
                       <HomeIcon color='primary' />
                       <Trans t={t} i18nKey='header.dashboard' />
@@ -107,7 +115,7 @@ export const Header: FC = () => {
                     <StyledNavLink to='/login' onClick={() => setActiveWallet(undefined)}>
                       <LogoutIcon /> <Trans t={t} i18nKey='header.logout' />
                     </StyledNavLink>
-                  </>
+                  </Box>
                 }
               />
               <Route
@@ -126,7 +134,7 @@ export const Header: FC = () => {
                     <Box
                       sx={{
                         display: {
-                          sx: 'none',
+                          xs: 'block',
                           sm: 'flex',
                         },
                         gap: 2,

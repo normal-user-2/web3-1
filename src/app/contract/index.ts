@@ -1,7 +1,7 @@
 import { UseMutationOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { BigNumber, ethers } from 'ethers';
-import { useEffect, useMemo } from 'react';
-import { useAccount, useConnect, useSigner } from 'wagmi';
+import { useMemo } from 'react';
+import { useAccount, useProvider, useSigner } from 'wagmi';
 
 import { baseQuery } from 'app/api';
 
@@ -24,23 +24,15 @@ export const useContractAddress = () =>
 
 const useEverclubContract = (): EverclubContract | undefined => {
   const { data: address } = useContractAddress();
-  const { data: signer } = useSigner();
+  const provider = useProvider();
+  const { data: signer, isFetched } = useSigner();
 
   return useMemo(() => {
-    if (address != null && signer != null) {
-      return new ethers.Contract(address, everclubInterface, signer) as unknown as EverclubContract;
+    // readonly contract if no metamask(signer)
+    if (address != null && (signer != null || isFetched) && provider != null) {
+      return new ethers.Contract(address, everclubInterface, signer ?? provider) as unknown as EverclubContract;
     }
-  }, [address, signer]);
-};
-
-export const useLoadAccount = ({ enabled }: { enabled?: boolean }) => {
-  const { isConnected } = useAccount();
-  const { connect, connectors } = useConnect();
-  useEffect(() => {
-    if (!isConnected && enabled) {
-      connect({ connector: connectors[0], chainId: +import.meta.env.VITE_CHAIN_ID });
-    }
-  }, [isConnected, connect, connectors, enabled]);
+  }, [address, provider, signer, isFetched]);
 };
 
 export const useGetPlatformsAmountQuery = () => {
