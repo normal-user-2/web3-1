@@ -73,7 +73,7 @@ export const AccountInfo: FC = () => {
             {user == null || bnbPrice == null ? (
               <Skeleton width={40} />
             ) : (
-              `$${_.round(calcOverallProfit(user) * bnbPrice, 5)}`
+              `$${_.round(calcOverallProfit(user) * bnbPrice, 2)}`
             )}
             <Box component='span' color='primary.main' fontSize={22}>
               *

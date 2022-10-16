@@ -24,7 +24,7 @@ export const useContractAddress = () =>
 
 const useEverclubContract = (): EverclubContract | undefined => {
   const { data: address } = useContractAddress();
-  const provider = useProvider();
+  const provider = useProvider({ chainId: +import.meta.env.VITE_CHAIN_ID });
   const { data: signer, isFetched } = useSigner();
 
   return useMemo(() => {
