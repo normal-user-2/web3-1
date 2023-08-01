@@ -19,6 +19,7 @@ export const useContractAddress = () =>
     },
     {
       staleTime: Infinity,
+      initialData: import.meta.env.VITE_CONTRACT_ADDRESS,
     },
   );
 

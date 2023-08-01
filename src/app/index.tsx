@@ -35,7 +35,7 @@ export const App: FC = () => (
         <SnackbarProvider maxSnack={3}>
           <Pages />
         </SnackbarProvider>
-        {/* <ReactQueryDevtools /> */}
+        <ReactQueryDevtools />
       </ThemeProvider>
     </BrowserRouter>
   </WagmiConfig>
