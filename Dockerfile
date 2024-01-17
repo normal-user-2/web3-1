@@ -15,7 +15,7 @@ COPY src ./src
 COPY public ./public
 COPY .env .eslintrc.cjs .prettierrc.cjs index.html package.json tsconfig.json tsconfig.node.json vite.config.ts ./
 
-RUN pnpm install -r --offline
+RUN pnpm install
 
 ARG API_URL
 ENV VITE_API_URL=$API_URL
